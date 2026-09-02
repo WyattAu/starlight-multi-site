@@ -1,0 +1,26 @@
+[shared]
+config = "./shared.config.ts"
+root = "."
+output_dir = "./dist"
+
+[[sites]]
+name = "ib"
+title = "Wyatt's Notes - IB"
+domain = "ib.wyattau.com"
+content_dir = "./docs/ib"
+sidebar = [{ autogenerate = { directory = "docs" } }]
+
+[[sites]]
+name = "alevel-maths-physics"
+title = "Wyatt's Notes - A-Level Maths & Physics"
+domain = "alevel-maths-physics.wyattau.com"
+content_dir = "./docs/alevel/maths_physics"
+sidebar = [{ autogenerate = { directory = "docs" } }]
+
+[[sites]]
+name = "programming"
+title = "Wyatt's Notes - Programming"
+tagline = "C++, Java, Python, Rust, Dart"
+domain = "programming.wyattau.com"
+content_dir = "./docs/programming"
+sidebar = [{ autogenerate = { directory = "docs" } }]

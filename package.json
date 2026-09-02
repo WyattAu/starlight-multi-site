@@ -1,0 +1,71 @@
+{
+  "name": "starlight-multi-site",
+  "version": "0.1.0",
+  "description": "CLI tool and shared config factory for managing multiple Starlight documentation sites from a single monorepo",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "types": "./dist/cli.d.ts"
+    }
+  },
+  "bin": {
+    "starlight-multi-site": "./dist/cli.js"
+  },
+  "files": [
+    "dist/",
+    "templates/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "starlight",
+    "astro",
+    "multi-site",
+    "monorepo",
+    "documentation",
+    "cli"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.23.0",
+    "smol-toml": "^1.3.0",
+    "commander": "^13.0.0",
+    "picocolors": "^1.1.0",
+    "execa": "^9.5.0",
+    "fast-glob": "^3.3.0",
+    "fs-extra": "^11.3.0"
+  },
+  "peerDependencies": {
+    "@astrojs/starlight": ">=0.30.0",
+    "astro": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@astrojs/starlight": {
+      "optional": true
+    },
+    "astro": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0",
+    "@astrojs/starlight": "^0.34.0",
+    "astro": "^5.0.0",
+    "@types/fs-extra": "^11.0.0"
+  }
+}

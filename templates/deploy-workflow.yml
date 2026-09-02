@@ -1,0 +1,30 @@
+name: Deploy {{SITE_TITLE}} to Cloudflare Pages
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+    paths:
+{{PATH_TRIGGERS}}
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-{{SITE_NAME}}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and Deploy {{SITE_TITLE}}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/starlight-build
+        with:
+          site-name: {{SITE_NAME}}
+          project-name: {{PROJECT_NAME}}
+          deploy-url: '{{DEPLOY_URL}}'
+          node-memory: '7168'
