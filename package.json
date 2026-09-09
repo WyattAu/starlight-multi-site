@@ -1,7 +1,17 @@
 {
-  "name": "starlight-multi-site",
+  "name": "@wyatt/starlight-multi-site",
   "version": "0.1.0",
   "description": "CLI tool and shared config factory for managing multiple Starlight documentation sites from a single monorepo",
+  "author": "WyattAu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WyattAu/starlight-multi-site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WyattAu/starlight-multi-site/issues"
+  },
+  "homepage": "https://github.com/WyattAu/starlight-multi-site#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +33,7 @@
     "templates/"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "dev": "tsc --watch",
     "test": "vitest run",
     "test:watch": "vitest",
