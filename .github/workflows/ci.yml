@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+  scratch-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Pack plugin
+        run: npm pack --pack-destination tests/scratch-site
+
+      - name: Install scratch site dependencies
+        working-directory: tests/scratch-site
+        run: npm install
+
+      - name: Install packed plugin
+        working-directory: tests/scratch-site
+        run: npm install --no-save './*.tgz'
+
+      - name: Build scratch site against real Starlight
+        working-directory: tests/scratch-site
+        run: npm run build
+
+      - name: Inspect dist output
+        working-directory: tests/scratch-site
+        run: |
+          # createConfig() must drive the output directory and site URL.
+          test -f dist/alpha/index.html
+          test -f dist/alpha/guide/one/index.html
+          grep -q "https://alpha.example.com/" dist/alpha/index.html
+
+      - name: Validate manifest with the CLI
+        working-directory: tests/scratch-site
+        run: |
+          node ../../node_modules/@wyatt/starlight-multi-site/dist/cli.js validate --manifest sites.toml
+          node ../../node_modules/@wyatt/starlight-multi-site/dist/cli.js list --manifest sites.toml

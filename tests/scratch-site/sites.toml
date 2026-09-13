@@ -1,0 +1,11 @@
+[shared]
+config = "shared.config.mjs"
+root = "."
+output_dir = "dist"
+
+[[sites]]
+name = "alpha"
+title = "Alpha Site"
+domain = "alpha.example.com"
+content_dir = "src/content/docs"
+sidebar = []

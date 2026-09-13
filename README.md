@@ -26,6 +26,30 @@ npm install -g @wyatt/starlight-multi-site
 starlight-multi-site --help
 ```
 
+### Manifest format
+
+```toml
+# sites.toml (passed via --manifest; defaults to sites.toml)
+[shared]
+config = "shared.config.mjs"  # module exporting the shared SharedConfig
+root = "."
+output_dir = "dist"
+
+[[sites]]
+name = "docs"
+title = "Docs Site"
+domain = "docs.example.com"
+content_dir = "sites/docs/content"
+sidebar = []
+
+[[sites]]
+name = "api"
+title = "API Site"
+domain = "api.example.com"
+content_dir = "sites/api/content"
+sidebar = []
+```
+
 ## Usage — config factory
 
 ```js

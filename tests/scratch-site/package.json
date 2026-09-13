@@ -1,0 +1,14 @@
+{
+  "name": "scratch-site",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "astro build"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.4",
+    "@astrojs/starlight": "0.34.8",
+    "astro": "5.18.2"
+  }
+}
